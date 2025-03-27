@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The 100</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <button id="categories-toggle" class="categories-toggle">
+        <i class="fas fa-layer-group"></i>
+        Categories
+    </button>
+
+    <div class="side-panel">
+        <div class="side-panel-header">
+            <h2>Categories</h2>
+            <button class="close-side-panel">&times;</button>
+        </div>
+        <div class="category-search">
+            <input type="text" id="category-search" placeholder="Search categories...">
+        </div>
+        <div class="categories-list">
+            <div id="no-results" class="no-results hidden">
+                <i class="fas fa-search"></i>
+                <p>No matching categories found</p>
+            </div>
+            <div id="categories-container">
+                <!-- Categories will be dynamically added here -->
+            </div>
+        </div>
+    </div>
+
+    <div class="game-container">
+        <div class="game-header">
+            <div class="title-section">
+                <div class="title-container">
+                    <div class="logo">
+                        <div class="logo-circle">
+                            <div class="logo-inner">100</div>
+                        </div>
+                    </div>
+                    <h1>The 100</h1>
+                </div>
+                <div class="category-badge">
+                    <span class="category-label">CATEGORY</span>
+                    <h2 id="current-category">Top 100 Countries by Area</h2>
+                </div>
+            </div>
+            <div class="stats-section">
+                <div class="stat-box">
+                    <span class="stat-label">CHANCES LEFT</span>
+                    <span id="chances" class="stat-value">5</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">SCORE</span>
+                    <span id="score" class="stat-value">0</span>
+                </div>
+            </div>
+            <button id="tutorial-btn" class="tutorial-btn">
+                <i class="fas fa-question-circle"></i>
+                How to Play
+            </button>
+        </div>
+
+        <div class="game-play">
+            <input type="text" id="guess-input" placeholder="Enter your guess...">
+            <button id="submit-guess">Submit Guess</button>
+        </div>
+
+        <div class="tiles-container">
+            <div class="tiles-wrapper">
+                <!-- Tiles will be added here dynamically -->
+            </div>
+        </div>
+
+        <div class="previous-guesses">
+            <h3>Previous Guesses:</h3>
+            <ul id="guesses-list"></ul>
+        </div>
+
+        <div id="game-over" class="hidden">
+            <h2>Game Over!</h2>
+            <p>Final Score: <span id="final-score">0</span></p>
+            <button id="play-again">Play Again</button>
+        </div>
+
+        <div id="popup" class="popup hidden">
+            <div class="popup-content">
+                <p>Not in the Top 100!</p>
+            </div>
+        </div>
+
+        <div id="invalid-popup" class="popup hidden">
+            <div class="popup-content">
+                <p>Invalid Country!</p>
+            </div>
+        </div>
+
+        <div id="duplicate-popup" class="popup hidden">
+            <div class="popup-content">
+                <p>Already Guessed!</p>
+            </div>
+        </div>
+
+        <div id="tutorial-modal" class="tutorial-modal hidden">
+            <div class="tutorial-content">
+                <h2>🎮 How to Play The 100?</h2>
+
+                <div class="tutorial-step">
+                    <div class="step-number">1</div>
+                    <h3>Look at the Category</h3>
+                    <p>If the category is "Top 100 Countries by Area"</p>
+                    <div class="example-box">
+                        <p>For this category, you need to guess countries that you think are among the 100 largest
+                            countries in the world.</p>
+                    </div>
+                </div>
+
+                <div class="tutorial-step">
+                    <div class="step-number">2</div>
+                    <h3>Make Your Guess</h3>
+                    <p>The closer your guess is to the 100th position, the more points you get. But, if you guess a
+                        country that is not in the top 100, you will get 0 points.</p>
+                    <div class="example-box">
+                        <div class="example-item">
+                            <span>Russia (Largest)</span>
+                            <span class="points">1 point</span>
+                        </div>
+                        <div class="example-item">
+                            <span>France (47th largest)</span>
+                            <span class="points">47 points</span>
+                        </div>
+                        <div class="example-item">
+                            <span>Iceland (100th largest)</span>
+                            <span class="points">100 points</span>
+                        </div>
+                        <div class="example-item warning">
+                            <span>Any country over rank 100</span>
+                            <span class="points zero">0 points</span>
+                        </div>
+                        <div class="example-item warning">
+                            <span>Invalid country name</span>
+                            <span class="points zero">0 points</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tutorial-step">
+                    <div class="step-number">3</div>
+                    <h3>Strategy</h3>
+                    <p>Your final score will be the sum of all your guesses. You have 5 guesses to maximize your score.
+                    </p>
+                    <div class="example-box">
+                        <p>💡 Think strategically! For this category:</p>
+                        <ul class="strategy-list">
+                            <li>Very large countries = Low Points</li>
+                            <li>Medium-sized countries = Medium Points</li>
+                            <li>Smaller countries (but still in top 100) = High Points</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <button id="close-tutorial" class="close-tutorial">Got it!</button>
+            </div>
+        </div>
+
+        <div id="category-modal" class="category-modal hidden">
+            <div class="category-modal-header">
+                <h2>Choose a Category</h2>
+                <button class="close-category-modal">&times;</button>
+            </div>
+            <div class="category-grid">
+                <!-- Categories will be added here dynamically -->
+            </div>
+        </div>
+    </div>
+    <script src="categories-data.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
